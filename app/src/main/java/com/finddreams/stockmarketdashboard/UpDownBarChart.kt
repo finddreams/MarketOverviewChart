@@ -57,13 +57,13 @@ fun UpDownBarChart(
             val topLeft = Offset(barLeft, barTop)
 
             // 绘制柱状图
-            drawRoundRect(color = item.color, topLeft = topLeft, size = barSize)
+            drawRoundRect(color = item.barColor, topLeft = topLeft, size = barSize)
 
             // 绘制顶部文字 (居中偏上)
             drawCenteredText(
                 textMeasurer,
                 text = item.zdNum.toString(),
-                color = item.color,
+                color = item.topTextColor,
                 centerX = barLeft + barWidth / 2, // 中心点位于柱子的中间
                 centerY = barTop,
                 offsetY = -12.dp.toPx(), // 距离顶部偏移
@@ -73,7 +73,7 @@ fun UpDownBarChart(
             drawCenteredText(
                 textMeasurer,
                 text = item.zdfRange.toString(),
-                color = item.color,
+                color = item.bottomTextColor,
                 centerX = barLeft + barWidth / 2, // 中心点位于柱子的中间
                 centerY = chartBottom,
                 offsetY = 4.dp.toPx() // 距离底部偏移

@@ -11,6 +11,10 @@ import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.finddreams.stockmarketdashboard.ui.theme.ColorStockGray
+import com.finddreams.stockmarketdashboard.ui.theme.ColorStockGreen
+import com.finddreams.stockmarketdashboard.ui.theme.ColorStockRed
+import kotlin.math.max
 import kotlin.math.min
 
 /**
@@ -27,18 +31,34 @@ fun UpDownHorizontalBar(
     modifier: Modifier = Modifier,
     spacing: Dp
 ) {
+    val minBarWidth: Dp = 4.dp // 设置最小宽度
     Canvas(modifier = modifier) {
         val totalWidth = size.width
         val height = size.height
         val spacingPx = spacing.toPx()
+        val minBarWidthPx = minBarWidth.toPx()
 
-        val width1 = totalWidth * progress1
-        val width2 = totalWidth * progress2
-        val width3 = totalWidth * progress3
+        // 初步计算每段的宽度
+        var width1 = max(totalWidth * progress1, minBarWidthPx)
+        var width2 = max(totalWidth * progress2, minBarWidthPx)
+        val remainingWidth = totalWidth - (width1 + width2 + spacingPx * 2)
 
-        val slantOffset = 13.dp.toPx()// 设置斜边偏移量
-        val cornerRadius = min(height / 2, 15.dp.toPx())
+        // 确保 width3 不低于最小宽度
+        if (remainingWidth >= minBarWidthPx) {
+            remainingWidth
+        } else {
+            // 如果剩余空间不足，则压缩前两段的宽度
+            val deficit = minBarWidthPx - remainingWidth
+            val adjustmentFactor = deficit / (width1 + width2)
+            width1 *= (1 - adjustmentFactor)
+            width2 *= (1 - adjustmentFactor)
+            minBarWidthPx
+        }
 
+        val slantOffset = 13.dp.toPx() // 设置斜边偏移量
+        val cornerRadius = min(height / 2, 13.dp.toPx())
+
+        // 第一段路径
         val path1 = Path().apply {
             moveTo(cornerRadius, 0f)
             lineTo(width1, 0f)
@@ -54,6 +74,7 @@ fun UpDownHorizontalBar(
         }
         drawPath(path1, color1)
 
+        // 第二段路径
         val path2 = Path().apply {
             moveTo(width1 + spacingPx, 0f)
             lineTo(width1 + width2 + spacingPx, 0f)
@@ -63,6 +84,7 @@ fun UpDownHorizontalBar(
         }
         drawPath(path2, color2)
 
+        // 第三段路径
         val path3 = Path().apply {
             moveTo(width1 + width2 + 2 * spacingPx, 0f)
             lineTo(totalWidth - cornerRadius, 0f)
@@ -87,11 +109,11 @@ fun UpDownHorizontalBar(riseNum: Int, fallNum: Int, flatNum: Int) {
     val ratioFlat = (flatNum.toFloat() / totalProgress)
     UpDownHorizontalBar(
         progress1 = ratioRise,
-        color1 = Color(0xFFE53935),
+        color1 = ColorStockRed,
         progress2 = ratioFlat,
-        color2 = Color(0xff98A1B2),
+        color2 = ColorStockGray,
         progress3 = ratioFall,
-        color3 = Color(0xFF00C853),
+        color3 = ColorStockGreen,
         modifier = Modifier
             .fillMaxWidth()
             .height(12.dp),
