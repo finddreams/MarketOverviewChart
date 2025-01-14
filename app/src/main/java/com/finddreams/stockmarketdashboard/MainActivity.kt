@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -21,6 +22,7 @@ import androidx.compose.ui.unit.sp
 import com.finddreams.stockmarketdashboard.ui.theme.ColorStockGreen
 import com.finddreams.stockmarketdashboard.ui.theme.ColorStockRed
 import com.finddreams.stockmarketdashboard.ui.theme.StockMarketDashboardTheme
+
 /**
  * 大盘分析UI图
  *Copyright (c) finddreams https://github.com/finddreams
@@ -47,7 +49,10 @@ class MainActivity : ComponentActivity() {
         ) {
             Text(text = "大盘分析", fontSize = 18.sp, fontWeight = FontWeight.Bold)
             UpDownBarChart(
-                modifier = Modifier.padding(vertical = 25.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(150.dp)
+                    .padding(vertical = 25.dp),
                 getBarDataList()
             )
             val riseNum = 3007

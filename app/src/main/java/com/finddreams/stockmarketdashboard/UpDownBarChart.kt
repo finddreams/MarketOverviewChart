@@ -32,8 +32,6 @@ fun UpDownBarChart(
 
     Canvas(
         modifier = modifier
-            .height(130.dp)
-            .fillMaxWidth()
     ) {
         val chartWidth = size.width
         val chartHeight = size.height
