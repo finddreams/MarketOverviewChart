@@ -18,7 +18,8 @@ import kotlin.math.max
 import kotlin.math.min
 
 /**
- * 涨跌柱状图
+ * 涨跌数量 横向对比图
+ *Copyright (c) finddreams https://github.com/finddreams
  */
 @Composable
 fun UpDownHorizontalBar(
@@ -29,9 +30,9 @@ fun UpDownHorizontalBar(
     progress3: Float,
     color3: Color,
     modifier: Modifier = Modifier,
-    spacing: Dp
+    spacing: Dp,
+    minBarWidth: Dp = 4.dp // 设置最小宽度
 ) {
-    val minBarWidth: Dp = 4.dp // 设置最小宽度
     Canvas(modifier = modifier) {
         val totalWidth = size.width
         val height = size.height
@@ -100,6 +101,7 @@ fun UpDownHorizontalBar(
         drawPath(path3, color3)
     }
 }
+
 @Composable
 fun UpDownHorizontalBar(riseNum: Int, fallNum: Int, flatNum: Int) {
     val totalProgress = riseNum + fallNum + flatNum

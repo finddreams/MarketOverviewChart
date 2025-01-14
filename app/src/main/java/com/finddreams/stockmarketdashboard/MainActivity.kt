@@ -21,7 +21,10 @@ import androidx.compose.ui.unit.sp
 import com.finddreams.stockmarketdashboard.ui.theme.ColorStockGreen
 import com.finddreams.stockmarketdashboard.ui.theme.ColorStockRed
 import com.finddreams.stockmarketdashboard.ui.theme.StockMarketDashboardTheme
-
+/**
+ * 大盘分析UI图
+ *Copyright (c) finddreams https://github.com/finddreams
+ */
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

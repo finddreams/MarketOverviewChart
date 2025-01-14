@@ -20,7 +20,8 @@ import androidx.compose.ui.unit.sp
 
 
 /**
- * 涨跌柱状图
+ *涨跌分布柱状图
+ *Copyright (c) finddreams https://github.com/finddreams
  */
 @Composable
 fun UpDownBarChart(
@@ -81,8 +82,6 @@ fun UpDownBarChart(
         }
     }
 }
-
-
 
 
 // 帮助函数：绘制文字
